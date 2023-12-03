@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="V_CAPSANDSOLS" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="V_CAPSANDSOLS"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="APP_CAPABILITIES_CUSTOMERCAPABILITIES">
+    <resourceUri>APP_CAPABILITIES_CUSTOMERCAPABILITIES</resourceUri>
+  </DataSource>
+  <DataSource id="APP_CAPABILITIES_SOLUTIONS">
+    <resourceUri>APP_CAPABILITIES_SOLUTIONS</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="TYPE"/>
+      <viewAttribute id="BUSINESSAREA"/>
+      <viewAttribute id="CAPABILITY"/>
+      <viewAttribute id="SOLUTION_SKU"/>
+      <viewAttribute id="INSCOPE"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="DESCRIPTION"/>
+      <viewAttribute id="METRICDESCRIPTION"/>
+      <viewAttribute id="NOTES"/>
+      <viewAttribute hidden="true" id="JOIN$SOLUTION_SKU$SKU"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="APP_CAPABILITIES_CUSTOMERCAPABILITIES">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TYPE" source="TYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="BUSINESSAREA" source="BUSINESSAREA"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CAPABILITY" source="CAPABILITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SOLUTION_SKU" source="SOLUTION_SKU"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INSCOPE" source="INSCOPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NOTES" source="NOTES"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SOLUTION_SKU$SKU" source="SOLUTION_SKU"/>
+    </input>
+    <input node="APP_CAPABILITIES_SOLUTIONS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPTION" source="DESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="METRICDESCRIPTION" source="METRICDESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SOLUTION_SKU$SKU" source="SKU"/>
+    </input>
+    <joinAttribute name="JOIN$SOLUTION_SKU$SKU"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="Join_1" columnName="ID"/>
+    </attribute>
+    <attribute id="TYPE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TYPE"/>
+      <keyMapping columnObjectName="Join_1" columnName="TYPE"/>
+    </attribute>
+    <attribute id="BUSINESSAREA" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="BUSINESSAREA"/>
+      <keyMapping columnObjectName="Join_1" columnName="BUSINESSAREA"/>
+    </attribute>
+    <attribute id="CAPABILITY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CAPABILITY"/>
+      <keyMapping columnObjectName="Join_1" columnName="CAPABILITY"/>
+    </attribute>
+    <attribute id="SOLUTION_SKU" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SOLUTION_SKU"/>
+      <keyMapping columnObjectName="Join_1" columnName="SOLUTION_SKU"/>
+    </attribute>
+    <attribute id="INSCOPE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="INSCOPE"/>
+      <keyMapping columnObjectName="Join_1" columnName="INSCOPE"/>
+    </attribute>
+    <attribute id="NAME" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="NAME"/>
+    </attribute>
+    <attribute id="DESCRIPTION" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DESCRIPTION"/>
+      <keyMapping columnObjectName="Join_1" columnName="DESCRIPTION"/>
+    </attribute>
+    <attribute id="METRICDESCRIPTION" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="METRICDESCRIPTION"/>
+      <keyMapping columnObjectName="Join_1" columnName="METRICDESCRIPTION"/>
+    </attribute>
+    <attribute id="NOTES" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NOTES"/>
+      <keyMapping columnObjectName="Join_1" columnName="NOTES"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="178"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="APP_CAPABILITIES_CUSTOMERCAPABILITIES" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="335"/>
+    </shape>
+    <shape modelObjectName="APP_CAPABILITIES_SOLUTIONS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="460" y="43"/>
+      <rectangleSize width="254"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
