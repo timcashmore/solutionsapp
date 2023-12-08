@@ -1,0 +1,213 @@
+{
+    "_version": "1.59.0",
+    "sap.app": {
+        "id": "businesscapabilities",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "subTitle": "{{appSubTitle}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.11.5",
+            "toolsId": "ac0ed29a-a267-49ea-9d5b-2ddbfd32ffef"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "odata/v4/capability/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "capabilities-list": {
+                    "semanticObject": "capabilities",
+                    "action": "list",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    }
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.120.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "businesscapabilities.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "BusinessCapabilitiesList",
+                    "target": "BusinessCapabilitiesList"
+                },
+                {
+                    "pattern": "BusinessCapabilities({key}):?query:",
+                    "name": "BusinessCapabilitiesObjectPage",
+                    "target": "BusinessCapabilitiesObjectPage"
+                }
+            ],
+            "targets": {
+                "BusinessCapabilitiesList": {
+                    "type": "Component",
+                    "id": "BusinessCapabilitiesList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "contextPath": "/BusinessCapabilities",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "BusinessCapabilities": {
+                                    "detail": {
+                                        "route": "BusinessCapabilitiesObjectPage"
+                                    }
+                                }
+                            },
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "columns": {
+                                        "DataField::customer": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::deployment": {
+                                            "availability": "Adaptation"
+                                        },
+                                        "DataField::notes": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::sapbusinessareaid": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::sapcapabilitydetails": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::sapcapabilityid": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::sapproductmetric": {
+                                            "availability": "Adaptation"
+                                        },
+                                        "DataField::sapproductmetricdetails": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::urllink": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::urlname": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::saplob": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::sapproductdetails": {
+                                            "availability": "Hidden"
+                                        },
+                                        "DataField::saprecommended": {
+                                            "availability": "Adaptation"
+                                        },
+                                        "DataField::sapsku": {
+                                            "availability": "Adaptation"
+                                        },
+                                        "DataField::capabilityid": {
+                                            "width": "10rem"
+                                        },
+                                        "DataField::inscope": {
+                                            "width": "5rem"
+                                        },
+                                        "DataField::businessarea": {
+                                            "width": "15rem"
+                                        },
+                                        "DataField::s4core": {
+                                            "width": "8rem"
+                                        }
+                                    }
+                                }
+                            },
+                            "initialLoad": "Enabled"
+                        }
+                    }
+                },
+                "BusinessCapabilitiesObjectPage": {
+                    "type": "Component",
+                    "id": "BusinessCapabilitiesObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "contextPath": "/BusinessCapabilities",
+                            "variantManagement": "Control"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

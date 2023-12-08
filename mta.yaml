@@ -34,6 +34,12 @@ modules:
 - name: SolutionsApp
   type: approuter.nodejs
   path: app/
+  parameters:
+    disk-quota: 1024M
+    keep-existing-routes: true
+    memory: 1024M
+  build-parameters:
+    ignore: ["default-env.json",".env"]
   requires:
   - name: srv-api
     group: destinations
@@ -48,10 +54,6 @@ modules:
       forwardAuthToken: false
       name: ui5
       url: https://ui5.sap.com
-  parameters:
-    disk-quota: 256M
-    keep-existing-routes: true
-    memory: 256M
 - name: SolutionsApp-app-content
   type: com.sap.application.content
   path: .
@@ -63,65 +65,9 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - capabilities.zip
-      name: capabilities
-      target-path: resources/
-    - artifacts:
-      - capsandsols.zip
-      name: capsandsols
-      target-path: resources/
-    - artifacts:
-      - buscapabilities.zip
-      name: buscapabilities
-      target-path: resources/
-    - artifacts:
-      - project1.zip
-      name: project1
-      target-path: resources/
-    - artifacts:
       - businesscapabilities.zip
       name: businesscapabilities
       target-path: resources/
-- name: capabilities
-  type: html5
-  path: app/capabilities
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: capsandsols
-  type: html5
-  path: app/capsandsols
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: buscapabilities
-  type: html5
-  path: app/buscapabilities
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: project1
-  type: html5
-  path: app/project1
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
 - name: businesscapabilities
   type: html5
   path: app/businesscapabilities
