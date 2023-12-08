@@ -24,7 +24,11 @@
         "undeploy": "cf undeploy SolutionsApp --delete-services --delete-service-keys --delete-service-brokers",
         "build": "rimraf resources mta_archives && mbt build --mtar archive",
         "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
-        "watch-capsandsols": "cds watch --open capsandsols/webapp/index.html?sap-ui-xx-viewCache=false"
+        "watch-capsandsols": "cds watch --open capsandsols/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-buscapabilities": "cds watch --open buscapabilities/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-caps": "cds watch --open caps/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-project1": "cds watch --open project1/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-businesscapabilities": "cds watch --open businesscapabilities/webapp/index.html?sap-ui-xx-viewCache=false"
     },
     "cds": {
         "requires": {
@@ -34,6 +38,8 @@
     },
     "sapux": [
         "app/capabilities",
-        "app/capsandsols"
+        "app/capsandsols",
+        "app/buscapabilities",
+        "app/businesscapabilities"
     ]
 }

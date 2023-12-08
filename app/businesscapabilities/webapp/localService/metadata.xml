@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CapabilityService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="CustomerCapabilities" EntityType="CapabilityService.CustomerCapabilities">
+                    <NavigationPropertyBinding Path="solution" Target="Solutions"/>
+                </EntitySet>
+                <EntitySet Name="Solutions" EntityType="CapabilityService.Solutions"/>
+                <EntitySet Name="CapabilityMapping" EntityType="CapabilityService.CapabilityMapping">
+                    <NavigationPropertyBinding Path="solution" Target="Solutions"/>
+                </EntitySet>
+                <EntitySet Name="SAPsolutions" EntityType="CapabilityService.SAPsolutions"/>
+                <EntitySet Name="SAPcapabilities" EntityType="CapabilityService.SAPcapabilities">
+                    <NavigationPropertyBinding Path="capability" Target="CapabilityMapping"/>
+                </EntitySet>
+                <EntitySet Name="SelectedCapabilities" EntityType="CapabilityService.SelectedCapabilities">
+                    <NavigationPropertyBinding Path="SAPproductnum" Target="Solutions"/>
+                </EntitySet>
+                <EntitySet Name="BusinessCapabilities" EntityType="CapabilityService.BusinessCapabilities"/>
+            </EntityContainer>
+            <EntityType Name="CustomerCapabilities">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.String" Nullable="false"/>
+                <Property Name="Type" Type="Edm.String"/>
+                <Property Name="businessArea" Type="Edm.String"/>
+                <Property Name="capability" Type="Edm.String"/>
+                <NavigationProperty Name="solution" Type="CapabilityService.Solutions">
+                    <ReferentialConstraint Property="solution_sku" ReferencedProperty="sku"/>
+                </NavigationProperty>
+                <Property Name="solution_sku" Type="Edm.String"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="inScope" Type="Edm.String"/>
+                <Property Name="notes" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Solutions">
+                <Key>
+                    <PropertyRef Name="sku"/>
+                </Key>
+                <Property Name="sku" Type="Edm.String" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="metricDescription" Type="Edm.String"/>
+                <Property Name="metric" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="CapabilityMapping">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.String" Nullable="false"/>
+                <Property Name="type" Type="Edm.String"/>
+                <Property Name="businessArea" Type="Edm.String"/>
+                <Property Name="capability" Type="Edm.String"/>
+                <NavigationProperty Name="solution" Type="CapabilityService.Solutions">
+                    <ReferentialConstraint Property="solution_sku" ReferencedProperty="sku"/>
+                </NavigationProperty>
+                <Property Name="solution_sku" Type="Edm.String"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="inScope" Type="Edm.String"/>
+                <Property Name="existing" Type="Edm.String"/>
+                <Property Name="s4hanacore" Type="Edm.String"/>
+                <Property Name="deployment" Type="Edm.String"/>
+                <Property Name="platform" Type="Edm.String"/>
+                <Property Name="notes" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="SAPsolutions">
+                <Key>
+                    <PropertyRef Name="sku"/>
+                </Key>
+                <Property Name="sku" Type="Edm.String" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="Metric" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="metricdesc" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="SAPcapabilities">
+                <Key>
+                    <PropertyRef Name="customerID"/>
+                    <PropertyRef Name="SAPbusinessareaID"/>
+                    <PropertyRef Name="SAPcapabilityID"/>
+                </Key>
+                <Property Name="customerID" Type="Edm.String" Nullable="false"/>
+                <Property Name="SAPbusinessareaID" Type="Edm.String" Nullable="false"/>
+                <Property Name="SAPcapabilityID" Type="Edm.String" Nullable="false"/>
+                <Property Name="SAPcapability" Type="Edm.String"/>
+                <Property Name="SAPlob" Type="Edm.String"/>
+                <Property Name="SAPbusinessarea" Type="Edm.String"/>
+                <NavigationProperty Name="capability" Type="CapabilityService.CapabilityMapping">
+                    <ReferentialConstraint Property="capability_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="capability_id" Type="Edm.String"/>
+                <Property Name="SAPcapabilitydescr" Type="Edm.String"/>
+                <Property Name="SAPrecommended" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="SelectedCapabilities">
+                <Key>
+                    <PropertyRef Name="customerID"/>
+                    <PropertyRef Name="SAPbusinessareaID"/>
+                    <PropertyRef Name="SAPcapabilityID"/>
+                </Key>
+                <Property Name="customerID" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="SAPbusinessareaID" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="SAPcapabilityID" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="SAPcapability" Type="Edm.String"/>
+                <Property Name="SAPlob" Type="Edm.String"/>
+                <Property Name="SAPbusinessarea" Type="Edm.String"/>
+                <Property Name="lob" Type="Edm.String"/>
+                <Property Name="businessArea" Type="Edm.String"/>
+                <Property Name="capabilityID" Type="Edm.String"/>
+                <Property Name="capability" Type="Edm.String"/>
+                <Property Name="inScope" Type="Edm.String" MaxLength="1"/>
+                <Property Name="partofcore" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="SAPproductnum" Type="CapabilityService.Solutions">
+                    <ReferentialConstraint Property="SAPproductnum_sku" ReferencedProperty="sku"/>
+                </NavigationProperty>
+                <Property Name="SAPproductnum_sku" Type="Edm.String"/>
+                <Property Name="SAPproductname" Type="Edm.String"/>
+                <Property Name="deployment" Type="Edm.String"/>
+                <Property Name="SAPcapabilitydescr" Type="Edm.String"/>
+                <Property Name="SAPrecommendedProd" Type="Edm.String"/>
+                <Property Name="URLname" Type="Edm.String" MaxLength="100"/>
+                <Property Name="URLlink" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="BusinessCapabilities">
+                <Key>
+                    <PropertyRef Name="customer"/>
+                    <PropertyRef Name="sapbusinessareaid"/>
+                    <PropertyRef Name="sapcapabilityid"/>
+                </Key>
+                <Property Name="customer" Type="Edm.String" Nullable="false"/>
+                <Property Name="sapbusinessareaid" Type="Edm.String" Nullable="false"/>
+                <Property Name="sapcapabilityid" Type="Edm.String" Nullable="false"/>
+                <Property Name="sapcapability" Type="Edm.String"/>
+                <Property Name="saplob" Type="Edm.String"/>
+                <Property Name="sapbusinessarea" Type="Edm.String"/>
+                <Property Name="businessarea" Type="Edm.String"/>
+                <Property Name="capabilityid" Type="Edm.String"/>
+                <Property Name="capability" Type="Edm.String"/>
+                <Property Name="inscope" Type="Edm.String"/>
+                <Property Name="s4core" Type="Edm.String"/>
+                <Property Name="sapsku" Type="Edm.String"/>
+                <Property Name="sapproductname" Type="Edm.String"/>
+                <Property Name="deployment" Type="Edm.String"/>
+                <Property Name="sapcapabilitydetails" Type="Edm.String"/>
+                <Property Name="saprecommended" Type="Edm.String"/>
+                <Property Name="sapproductdetails" Type="Edm.String"/>
+                <Property Name="sapproductmetric" Type="Edm.String"/>
+                <Property Name="sapproductmetricdetails" Type="Edm.String"/>
+                <Property Name="urlname" Type="Edm.String"/>
+                <Property Name="urllink" Type="Edm.String"/>
+                <Property Name="notes" Type="Edm.String"/>
+            </EntityType>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
